@@ -21,5 +21,6 @@ true outputs within a user-defined error :math:`\alpha`.
    anomaly_detection
    api
    metrics
+   routing
    plotting
    theory_overview

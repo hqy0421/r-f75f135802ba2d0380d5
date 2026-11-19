@@ -4,6 +4,20 @@ This file documents main changes across releases of **PUNCC**.
 
 ---
 
+## [Unreleased]
+
+### Added
+- `deel.puncc.routing` module for calibration-driven, capacity-constrained batch routing of conformal classification sets. `BatchRouter` and `route_batch` predict an independent calibration set and the new records with a fixed probability predictor, build native `LAC` prediction sets, then route each record to one category of its set or to manual review while enforcing per-category minimum/maximum volumes and a manual review cap.
+- `deel.puncc.api.routing.solve_batch_routing` exact integer optimizer (HiGHS MILP via `scipy.optimize.milp`) minimizing the global routing cost, with plan verification and explicit infeasibility diagnostics.
+- `RoutingResult` exposes actual probabilities, native LAC sets, per-record details aligned on original sample IDs, and queue volumes/costs counted from those details.
+- `RoutingValidationError`, `RoutingPredictionError`, `RoutingInfeasibleError` and `RoutingSolverError`: prediction, calibration, validation or optimization failures never return a partial routing plan.
+- `docs/source/routing.rst` documentation page and `tests/api/test_routing.py` test suite, including brute-force optimality checks.
+
+### Compatibility
+- Purely additive: existing `LAC`/`ClasswiseLAC`/`RAPS`/`APS` and calibrator/splitter APIs are unchanged.
+
+---
+
 ## [0.9.3] - 2026-06-23
 
 ### Changed
